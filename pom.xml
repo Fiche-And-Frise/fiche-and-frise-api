@@ -1,9 +1,15 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>platine.projet</groupId>
+    <groupId>com.platine</groupId>
     <artifactId>ficheandfrise</artifactId>
     <version>0.1.0</version>
-    <packaging>jar</packaging> 
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+    </parent>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source> 
@@ -11,6 +17,22 @@
     </properties>
 
     <dependencies>
+
+        <!-- spring-boot web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- testing --> 
         <dependency>
@@ -31,6 +53,7 @@
             <version>2.23.4</version>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 

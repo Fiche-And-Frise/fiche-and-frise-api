@@ -1,12 +1,31 @@
 package com.platine.fiche_frise_api.bo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Fiche {
 
+    @Id
     private int id;
+
+    @Column
     private String name;
+    @Column
     private String recto;
+    @Column
     private String verso;
+    @Column
     private String theme;
+
+    public Fiche(int id, String name, String recto, String verso, String theme) {
+        this.id = id;
+        this.name = name;
+        this.recto = recto;
+        this.verso = verso;
+        this.theme = theme;
+    }
 
     public int getId() {
         return id;
