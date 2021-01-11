@@ -2,9 +2,11 @@ package com.platine.fiche_frise_api.service;
 
 import com.platine.fiche_frise_api.bo.Fiche;
 import com.platine.fiche_frise_api.repository.FicheRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FicheServiceImpl implements FicheService{
 
     private FicheRepository repository;
