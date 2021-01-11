@@ -20,7 +20,7 @@ public class Fiche {
     private String theme;
 
     public Fiche(){
-        
+
     }
 
     public Fiche(int id, String name, String recto, String verso, String theme) {

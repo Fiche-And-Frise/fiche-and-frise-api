@@ -7,6 +7,10 @@ import java.util.List;
 public interface FicheService {
     Fiche getFiche(int id);
     Fiche getFiche(String theme);
-    List<Fiche> getAllFiches();
+    Iterable<Fiche> getAllFiches();
     List<Fiche> getFichesByTheme(String theme);
+
+    Fiche createFiche(Fiche fiche);
+    Fiche updateFiche(Fiche fiche);
+    void deleteFiche(int id);
 }
