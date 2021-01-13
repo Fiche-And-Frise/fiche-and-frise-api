@@ -2,7 +2,9 @@ package com.platine.fiche_frise_api.service;
 
 import com.platine.fiche_frise_api.bo.Frise;
 import com.platine.fiche_frise_api.repository.FriseRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FriseServiceImpl implements FriseService{
 
    private FriseRepository repository;

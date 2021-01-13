@@ -15,9 +15,9 @@ public class Frise {
     @Column
     private String theme;
     @Column
-    private Date dateDebut;
+    private int dateDebut;
     @Column
-    private Date dateFin;
+    private int dateFin;
     @Column
     private String evenement;
 
@@ -25,7 +25,7 @@ public class Frise {
 
     }
 
-    public Frise(int id, String name, String theme, Date dateDebut, Date dateFin, String evenement){
+    public Frise(int id, String name, String theme, int dateDebut, int dateFin, String evenement){
         this.id = id;
         this.name = name;
         this.theme = theme;
@@ -58,19 +58,19 @@ public class Frise {
         this.theme = theme;
     }
 
-    public Date getDateDebut() {
+    public int getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Date dateDebut) {
+    public void setDateDebut(int dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public Date getDateFin() {
+    public int getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Date dateFin) {
+    public void setDateFin(int dateFin) {
         this.dateFin = dateFin;
     }
 
