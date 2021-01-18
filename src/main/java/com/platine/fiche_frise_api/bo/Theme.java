@@ -21,6 +21,18 @@ public class Theme {
     @OneToMany
     private List<Frise> listFrises;
 
+    public Theme(){
+
+    }
+
+    public Theme(int id, String name, String color, List<Fiche> listFiches, List<Frise> listFrises) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+        this.listFiches = listFiches;
+        this.listFrises = listFrises;
+    }
+
     public int getId() {
         return id;
     }

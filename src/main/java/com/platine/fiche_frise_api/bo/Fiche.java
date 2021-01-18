@@ -18,19 +18,18 @@ public class Fiche {
     @Column
     private String verso;
 
-    @OneToOne
-    private Theme idTheme;
+    /*@OneToOne
+    private Theme idTheme;*/
 
     public Fiche(){
 
     }
 
-    public Fiche(int id, String name, String recto, String verso, Theme idTheme) {
+    public Fiche(int id, String name, String recto, String verso) {
         this.id = id;
         this.name = name;
         this.recto = recto;
         this.verso = verso;
-        this.idTheme = idTheme;
     }
 
     public int getId() {
@@ -65,11 +64,11 @@ public class Fiche {
         this.verso = verso;
     }
 
-    public Theme getTheme() {
+    /*public Theme getTheme() {
         return idTheme;
     }
 
     public void setTheme(Theme idTheme) {
         this.idTheme = idTheme;
-    }
+    }*/
 }

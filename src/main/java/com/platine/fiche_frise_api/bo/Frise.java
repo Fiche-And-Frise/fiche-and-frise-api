@@ -16,17 +16,16 @@ public class Frise {
     @Column
     private String evenement;
 
-    @OneToOne
-    private Theme idTheme;
+    /*@OneToOne
+    private Theme idTheme;*/
 
     public Frise(){
 
     }
 
-    public Frise(int id, String name, Theme idTheme, int dateDebut, int dateFin, String evenement){
+    public Frise(int id, String name, int dateDebut, int dateFin, String evenement){
         this.id = id;
         this.name = name;
-        this.idTheme = idTheme;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.evenement = evenement;
@@ -46,14 +45,6 @@ public class Frise {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Theme getTheme() {
-        return idTheme;
-    }
-
-    public void setTheme(Theme theme) {
-        this.idTheme = idTheme;
     }
 
     public int getDateDebut() {
