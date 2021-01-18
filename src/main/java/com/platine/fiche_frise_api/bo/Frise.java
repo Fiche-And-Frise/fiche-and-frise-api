@@ -1,8 +1,6 @@
 package com.platine.fiche_frise_api.bo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Frise {
@@ -12,22 +10,23 @@ public class Frise {
     @Column
     private String name;
     @Column
-    private String theme;
-    @Column
     private int dateDebut;
     @Column
     private int dateFin;
     @Column
     private String evenement;
 
+    @OneToOne
+    private Theme idTheme;
+
     public Frise(){
 
     }
 
-    public Frise(int id, String name, String theme, int dateDebut, int dateFin, String evenement){
+    public Frise(int id, String name, Theme idTheme, int dateDebut, int dateFin, String evenement){
         this.id = id;
         this.name = name;
-        this.theme = theme;
+        this.idTheme = idTheme;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.evenement = evenement;
@@ -49,12 +48,12 @@ public class Frise {
         this.name = name;
     }
 
-    public String getTheme() {
-        return theme;
+    public Theme getTheme() {
+        return idTheme;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setTheme(Theme theme) {
+        this.idTheme = idTheme;
     }
 
     public int getDateDebut() {

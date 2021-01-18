@@ -3,6 +3,7 @@ package com.platine.fiche_frise_api.bo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Fiche {
@@ -16,19 +17,20 @@ public class Fiche {
     private String recto;
     @Column
     private String verso;
-    @Column
-    private String theme;
+
+    @OneToOne
+    private Theme idTheme;
 
     public Fiche(){
 
     }
 
-    public Fiche(int id, String name, String recto, String verso, String theme) {
+    public Fiche(int id, String name, String recto, String verso, Theme idTheme) {
         this.id = id;
         this.name = name;
         this.recto = recto;
         this.verso = verso;
-        this.theme = theme;
+        this.idTheme = idTheme;
     }
 
     public int getId() {
@@ -63,11 +65,11 @@ public class Fiche {
         this.verso = verso;
     }
 
-    public String getTheme() {
-        return theme;
+    public Theme getTheme() {
+        return idTheme;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setTheme(Theme idTheme) {
+        this.idTheme = idTheme;
     }
 }
