@@ -67,11 +67,11 @@ public class Frise {
         this.dateFin = dateFin;
     }
 
-    public List<Evenement> getEvenement() {
+    public List<Evenement> getEvenements() {
         return listEvenements;
     }
 
-    public void setEvenement(List<Evenement> listEvenements) {
+    public void setEvenements(List<Evenement> listEvenements) {
         this.listEvenements = listEvenements;
     }
 }

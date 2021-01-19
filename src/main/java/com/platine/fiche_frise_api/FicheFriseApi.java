@@ -1,8 +1,10 @@
 package com.platine.fiche_frise_api;
 
+import com.platine.fiche_frise_api.bo.Evenement;
 import com.platine.fiche_frise_api.bo.Fiche;
 import com.platine.fiche_frise_api.bo.Frise;
 import com.platine.fiche_frise_api.bo.Theme;
+import com.platine.fiche_frise_api.repository.EvenementRepository;
 import com.platine.fiche_frise_api.repository.FicheRepository;
 import com.platine.fiche_frise_api.repository.FriseRepository;
 import com.platine.fiche_frise_api.repository.ThemeRepository;
@@ -25,11 +27,25 @@ public class FicheFriseApi {
 
     @Bean
     @Autowired
-    public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository) {
+    public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository, EvenementRepository evenementRepository) {
         return (args) -> {
 
             List<Fiche> listFiches = new ArrayList<>();
             List<Frise> listFrises = new ArrayList<>();
+
+            List<Evenement> listEvenements = new ArrayList<>();
+
+            var evenementPremiereGM = new Evenement(10,
+                    "Premiere Guerre Mondiale",
+                    1914,
+                    1918);
+            var evenementDeuxiemeGM = new Evenement(11,
+                    "Deuxieme Guerre Mondiale",
+                    1939,
+                    1945);
+
+            listEvenements.add(evenementPremiereGM);
+            listEvenements.add(evenementDeuxiemeGM);
 
 
             var ficheMaxime = new Fiche(1, "Première fiche de Maxime",
@@ -43,7 +59,7 @@ public class FicheFriseApi {
             var friseTest = new Frise(1,"Frise de test",
                     1900,
                     2000,
-                    "Pas d'evenements"
+                    listEvenements
                     );
 
             listFiches.add(ficheMaxime);
@@ -61,6 +77,10 @@ public class FicheFriseApi {
             // save a couple of fiches
             ficheRepository.save(ficheMaxime);
             ficheRepository.save(ficheYanis);
+
+            //save an event
+            evenementRepository.save(evenementPremiereGM);
+            evenementRepository.save(evenementDeuxiemeGM);
 
             //save a frise
             friseRepository.save(friseTest);

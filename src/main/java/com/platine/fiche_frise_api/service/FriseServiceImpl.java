@@ -1,8 +1,11 @@
 package com.platine.fiche_frise_api.service;
 
+import com.platine.fiche_frise_api.bo.Evenement;
 import com.platine.fiche_frise_api.bo.Frise;
 import com.platine.fiche_frise_api.repository.FriseRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class FriseServiceImpl implements FriseService{
@@ -36,5 +39,10 @@ public class FriseServiceImpl implements FriseService{
     @Override
     public void deleteFrise(int id) {
         this.repository.delete(this.repository.findById(id).get());
+    }
+
+    @Override
+    public Iterable<Evenement> getAllEvenements(int id) {
+        return Objects.requireNonNull(this.repository.findById(id).orElse(null)).getEvenements();
     }
 }

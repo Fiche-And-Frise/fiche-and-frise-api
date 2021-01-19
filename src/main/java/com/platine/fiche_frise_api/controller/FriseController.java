@@ -1,5 +1,6 @@
 package com.platine.fiche_frise_api.controller;
 
+import com.platine.fiche_frise_api.bo.Evenement;
 import com.platine.fiche_frise_api.bo.Fiche;
 import com.platine.fiche_frise_api.bo.Frise;
 import com.platine.fiche_frise_api.service.FriseService;
@@ -25,5 +26,10 @@ public class FriseController {
     @GetMapping("/{id}")
     public Frise getFrise(@PathVariable int id){
         return this.friseService.getFrise(id);
+    }
+
+    @GetMapping("/{id}/evenements/")
+    public Iterable<Evenement> getAllEvenements(@PathVariable int id){
+        return this.friseService.getAllEvenements(id);
     }
 }
