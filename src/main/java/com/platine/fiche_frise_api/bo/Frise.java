@@ -1,6 +1,7 @@
 package com.platine.fiche_frise_api.bo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Frise {
@@ -16,8 +17,8 @@ public class Frise {
     @Column
     private int dateFin;
 
-    @Embedded
-    private Evenement evenement;
+    @OneToMany
+    private List<Evenement> listEvenements;
 
     /*@OneToOne
     private Theme idTheme;*/
@@ -26,12 +27,12 @@ public class Frise {
 
     }
 
-    public Frise(int id, String name, int dateDebut, int dateFin, Evenement evenement){
+    public Frise(int id, String name, int dateDebut, int dateFin, List<Evenement> listEvenements){
         this.id = id;
         this.name = name;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.evenement = evenement;
+        this.listEvenements = listEvenements;
     }
 
     public int getId() {
@@ -66,11 +67,11 @@ public class Frise {
         this.dateFin = dateFin;
     }
 
-    public Evenement getEvenement() {
-        return evenement;
+    public List<Evenement> getEvenement() {
+        return listEvenements;
     }
 
-    public void setEvenement(Evenement evenement) {
-        this.evenement = evenement;
+    public void setEvenement(List<Evenement> listEvenements) {
+        this.listEvenements = listEvenements;
     }
 }

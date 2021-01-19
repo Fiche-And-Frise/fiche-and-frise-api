@@ -1,10 +1,10 @@
 package com.platine.fiche_frise_api.bo;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class Evenement {
 
     @Id
