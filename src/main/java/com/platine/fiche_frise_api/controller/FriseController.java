@@ -32,4 +32,9 @@ public class FriseController {
     public Iterable<Evenement> getAllEvenements(@PathVariable int id){
         return this.friseService.getAllEvenements(id);
     }
+
+    @GetMapping("/{id}/evenements/{idEvenement}")
+    public Evenement getEvenement(@PathVariable int id, @PathVariable int idEvenement){
+        return this.friseService.getEvenement(id, idEvenement);
+    }
 }

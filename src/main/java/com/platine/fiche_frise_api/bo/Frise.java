@@ -74,4 +74,13 @@ public class Frise {
     public void setEvenements(List<Evenement> listEvenements) {
         this.listEvenements = listEvenements;
     }
+    
+    public Evenement getEvenementById(int idEvenement){
+        for (Evenement e : listEvenements) {
+            if(e.getId() == idEvenement){
+                return e;
+            }
+        }
+        return null;
+    }
 }

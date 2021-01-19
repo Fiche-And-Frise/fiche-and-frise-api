@@ -15,4 +15,5 @@ public interface FriseService {
     void deleteFrise(int id);
 
     Iterable<Evenement> getAllEvenements(int id);
+    Evenement getEvenement(int id, int idEvenement);
 }

@@ -45,4 +45,9 @@ public class FriseServiceImpl implements FriseService{
     public Iterable<Evenement> getAllEvenements(int id) {
         return Objects.requireNonNull(this.repository.findById(id).orElse(null)).getEvenements();
     }
+
+    @Override
+    public Evenement getEvenement(int id, int idEvenement) {
+        return this.repository.findById(id).orElse(null).getEvenementById(idEvenement);
+    }
 }
