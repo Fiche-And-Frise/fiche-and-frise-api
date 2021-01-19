@@ -1,9 +1,12 @@
 package com.platine.fiche_frise_api.bo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Id;
 
-@Entity
-public class Frise {
+@Embeddable
+public class Evenement {
+
     @Id
     private int id;
 
@@ -16,22 +19,15 @@ public class Frise {
     @Column
     private int dateFin;
 
-    @Embedded
-    private Evenement evenement;
-
-    /*@OneToOne
-    private Theme idTheme;*/
-
-    public Frise(){
+    public Evenement(){
 
     }
 
-    public Frise(int id, String name, int dateDebut, int dateFin, Evenement evenement){
+    public Evenement(int id, String name, int dateDebut, int dateFin) {
         this.id = id;
         this.name = name;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.evenement = evenement;
     }
 
     public int getId() {
@@ -64,13 +60,5 @@ public class Frise {
 
     public void setDateFin(int dateFin) {
         this.dateFin = dateFin;
-    }
-
-    public Evenement getEvenement() {
-        return evenement;
-    }
-
-    public void setEvenement(Evenement evenement) {
-        this.evenement = evenement;
     }
 }
