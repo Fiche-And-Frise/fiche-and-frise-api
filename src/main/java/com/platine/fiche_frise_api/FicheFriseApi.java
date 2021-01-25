@@ -4,21 +4,20 @@ import com.platine.fiche_frise_api.bo.Evenement;
 import com.platine.fiche_frise_api.bo.Fiche;
 import com.platine.fiche_frise_api.bo.Frise;
 import com.platine.fiche_frise_api.bo.Theme;
-import com.platine.fiche_frise_api.repository.EvenementRepository;
-import com.platine.fiche_frise_api.repository.FicheRepository;
-import com.platine.fiche_frise_api.repository.FriseRepository;
-import com.platine.fiche_frise_api.repository.ThemeRepository;
+import com.platine.fiche_frise_api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackageClasses = UserRepository.class)
 public class FicheFriseApi {
 
     public static void main(String... args) {
