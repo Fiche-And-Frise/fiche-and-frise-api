@@ -15,22 +15,25 @@ public class Theme {
     @Column
     private String color;
 
-    @OneToMany
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "theme", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Fiche> listFiches;
 
-    @OneToMany
+    @OneToMany(mappedBy = "theme", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Frise> listFrises;
 
     public Theme(){
 
     }
 
-    public Theme(int id, String name, String color, List<Fiche> listFiches, List<Frise> listFrises) {
+    public Theme(int id, String name, String color, User user) {
         this.id = id;
         this.name = name;
         this.color = color;
-        this.listFiches = listFiches;
-        this.listFrises = listFrises;
+        this.user = user;
     }
 
     public int getId() {

@@ -25,70 +25,84 @@ public class FicheFriseApi {
     public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository, EvenementRepository evenementRepository, UserRepository userRepository) {
         return (args) -> {
 
-            List<Fiche> listFiches = new ArrayList<>();
-            List<Frise> listFrises = new ArrayList<>();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            User maxime = new User("maxime", passwordEncoder.encode("lol"),
+                    true, "ROLE_USER");
 
-            List<Evenement> listEvenements = new ArrayList<>();
+            User yanis = new User("yanis", passwordEncoder.encode("bonjour"),
+                    true, "ROLE_USER");
+
+            var themePremiereGM = new Theme(23,
+                    "TestTheme",
+                    "black",
+                    maxime);
+
+            var themeSecondeGM = new Theme(12,
+                    "TestTheme",
+                    "black",
+                    yanis);
+
+            var ficheMaxime = new Fiche(1, "Première fiche de Maxime",
+                    "La première fiche de Maxime",
+                    "19/07/1998",
+                    maxime,
+                    themePremiereGM);
+
+            var ficheMaxime2 = new Fiche(3, "Deuxième fiche de Maxime",
+                    "La deuxième fiche de Maxime",
+                    "Je suis le verso !",
+                    maxime,
+                    themePremiereGM);
+
+            var ficheYanis = new Fiche(2, "Première fiche de Yanis",
+                    "La première fiche de Yanis, ici c'est le verso",
+                    "Date inconnue",
+                    yanis,
+                    themeSecondeGM);
+
+            var friseMaxime = new Frise(38,"Frise de Maxime",
+                    1998,
+                    2050,
+                    maxime,
+                    themePremiereGM);
+
+            var friseYanis = new Frise(50,"Frise de Yanis",
+                    1900,
+                    2000,
+                    yanis,
+                    themeSecondeGM);
 
             var evenementPremiereGM = new Evenement(10,
                     "Premiere Guerre Mondiale",
                     1914,
-                    1918);
+                    1918,
+                    friseMaxime);
             var evenementDeuxiemeGM = new Evenement(11,
                     "Deuxieme Guerre Mondiale",
                     1939,
-                    1945);
+                    1945,
+                    friseYanis);
 
-            listEvenements.add(evenementPremiereGM);
-            listEvenements.add(evenementDeuxiemeGM);
+            //save a user
+            userRepository.save(maxime);
+            userRepository.save(yanis);
 
-
-            var ficheMaxime = new Fiche(1, "Première fiche de Maxime",
-                    "La première fiche de Maxime",
-                    "19/07/1998");
-
-            var ficheYanis = new Fiche(2, "Première fiche de Yanis",
-                    "La première fiche de Yanis, ici c'est le verso",
-                    "Date inconnue");
-
-            var friseTest = new Frise(1,"Frise de test",
-                    1900,
-                    2000,
-                    listEvenements
-                    );
-
-            listFiches.add(ficheMaxime);
-            listFiches.add(ficheYanis);
-
-            listFrises.add(friseTest);
-
-            var themeTest = new Theme(1,
-                    "TestTheme",
-                    "black",
-                    listFiches,
-                    listFrises);
-
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            User yanis = new User("yanis", passwordEncoder.encode("bonjour"),
-                    true, "ROLE_USER",
-                    Collections.singletonList(themeTest), Collections.singletonList(ficheYanis), listFrises);
+            //save a theme
+            themeRepository.save(themePremiereGM);
+            themeRepository.save(themeSecondeGM);
 
             // save a couple of fiches
             ficheRepository.save(ficheMaxime);
+            ficheRepository.save(ficheMaxime2);
             ficheRepository.save(ficheYanis);
+
+            //save a frise
+            friseRepository.save(friseMaxime);
+            friseRepository.save(friseYanis);
 
             //save an event
             evenementRepository.save(evenementPremiereGM);
             evenementRepository.save(evenementDeuxiemeGM);
-
-            //save a frise
-            friseRepository.save(friseTest);
-
-            //save a theme
-            themeRepository.save(themeTest);
-
-            //save a user
-            userRepository.save(yanis);
 
         };
     }

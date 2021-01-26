@@ -1,8 +1,12 @@
 package com.platine.fiche_frise_api.controller;
 
 import com.platine.fiche_frise_api.bo.Fiche;
+import com.platine.fiche_frise_api.bo.User;
+import com.platine.fiche_frise_api.config.MyUserDetails;
 import com.platine.fiche_frise_api.service.FicheService;
 import com.platine.fiche_frise_api.config.MyUserDetailsService;
+import com.platine.fiche_frise_api.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,15 +18,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class FicheController {
 
     private final FicheService ficheService;
-    //private final MyUserDetailsService userService;
+    private final UserService userService;
 
-    public FicheController(FicheService ficheService) {
+    @Autowired
+    private MyUserDetailsService userDetailsService;
+
+    public FicheController(FicheService ficheService, UserService userService) {
         this.ficheService = ficheService;
+        this.userService = userService;
     }
 
     @GetMapping("")
     public Iterable<Fiche> getAllFiches(){
-        return this.ficheService.getAllFiches();
+        User currentUser = getCurrentUser();
+        if(currentUser != null){
+            System.out.println("Dans le get fiches : " + currentUser);
+            return this.ficheService.getFichesByUser(currentUser);
+        }
+        return null;
     }
 
     @GetMapping("/{id}")
@@ -30,7 +43,8 @@ public class FicheController {
         return this.ficheService.getFiche(id);
     }
 
-    private org.springframework.security.core.userdetails.User getCurrentUser(){
-        return (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    private User getCurrentUser(){
+        MyUserDetails user = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userService.getUserByUserName(user.getUsername());
     }
 }

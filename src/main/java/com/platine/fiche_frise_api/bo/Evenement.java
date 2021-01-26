@@ -1,8 +1,6 @@
 package com.platine.fiche_frise_api.bo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Evenement {
@@ -19,15 +17,20 @@ public class Evenement {
     @Column
     private int dateFin;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "frise_id", nullable = false)
+    private Frise frise;
+
     public Evenement(){
 
     }
 
-    public Evenement(int id, String name, int dateDebut, int dateFin) {
+    public Evenement(int id, String name, int dateDebut, int dateFin, Frise frise) {
         this.id = id;
         this.name = name;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.frise = frise;
     }
 
     public int getId() {

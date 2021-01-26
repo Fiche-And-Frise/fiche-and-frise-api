@@ -17,22 +17,28 @@ public class Frise {
     @Column
     private int dateFin;
 
-    @OneToMany
+    @OneToMany(mappedBy = "frise", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Evenement> listEvenements;
 
-    /*@OneToOne
-    private Theme idTheme;*/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "theme_id", nullable = false)
+    private Theme theme;
 
     public Frise(){
 
     }
 
-    public Frise(int id, String name, int dateDebut, int dateFin, List<Evenement> listEvenements){
+    public Frise(int id, String name, int dateDebut, int dateFin, User user, Theme theme){
         this.id = id;
         this.name = name;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.listEvenements = listEvenements;
+        this.user = user;
+        this.theme = theme;
     }
 
     public int getId() {

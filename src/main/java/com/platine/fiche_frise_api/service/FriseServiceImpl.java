@@ -2,6 +2,7 @@ package com.platine.fiche_frise_api.service;
 
 import com.platine.fiche_frise_api.bo.Evenement;
 import com.platine.fiche_frise_api.bo.Frise;
+import com.platine.fiche_frise_api.bo.User;
 import com.platine.fiche_frise_api.repository.FriseRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,11 @@ public class FriseServiceImpl implements FriseService{
     @Override
     public Iterable<Frise> getAllFrises() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public Iterable<Frise> getFrisesByUser(User currentUser) {
+        return this.repository.findAllByUser(currentUser);
     }
 
     @Override

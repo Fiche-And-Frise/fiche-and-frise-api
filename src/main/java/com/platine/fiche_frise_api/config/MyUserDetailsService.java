@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public User saveNewUser(UserRegistrationDto userRegistrationDto){
         User user = new User(userRegistrationDto.getUserName(),
                 passwordEncoder.encode(userRegistrationDto.getPassword()),
-                true, "ROLE_USER", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+                true, "ROLE_USER");
 
         return userRepository.save(user);
     }

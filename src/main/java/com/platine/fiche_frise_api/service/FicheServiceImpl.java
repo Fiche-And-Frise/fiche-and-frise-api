@@ -1,6 +1,7 @@
 package com.platine.fiche_frise_api.service;
 
 import com.platine.fiche_frise_api.bo.Fiche;
+import com.platine.fiche_frise_api.bo.User;
 import com.platine.fiche_frise_api.repository.FicheRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +22,18 @@ public class FicheServiceImpl implements FicheService{
     }
 
     @Override
-    public Fiche getFiche(String theme) {
+    public Iterable<Fiche> getFichesByTheme(int themeId) {
         return null;
+    }
+
+    @Override
+    public Iterable<Fiche> getFichesByUser(User user) {
+        return this.repository.findAllByUser(user);
     }
 
     @Override
     public Iterable<Fiche> getAllFiches() {
         return this.repository.findAll();
-    }
-
-    @Override
-    public List<Fiche> getFichesByTheme(String theme) {
-        return null;
     }
 
     @Override

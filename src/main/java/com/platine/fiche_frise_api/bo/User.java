@@ -14,23 +14,20 @@ public class User {
     private String password;
     private boolean active;
     private String role;
-    @OneToMany
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Theme> themes;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Fiche> fiches;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Frise> frises;
 
-    public User(String userName, String password, boolean active, String role, List<Theme> themes, List<Fiche> fiches, List<Frise> frises) {
+    public User(String userName, String password, boolean active, String role) {
         this.userName = userName;
         this.password = password;
         this.active = active;
         this.role = role;
-        this.themes = themes;
-        this.fiches = fiches;
-        this.frises = frises;
     }
 
     public User() {
@@ -77,27 +74,4 @@ public class User {
         this.role = role;
     }
 
-    public List<Theme> getThemes() {
-        return themes;
-    }
-
-    public void setThemes(List<Theme> themes) {
-        this.themes = themes;
-    }
-
-    public List<Fiche> getFiches() {
-        return fiches;
-    }
-
-    public void setFiches(List<Fiche> fiches) {
-        this.fiches = fiches;
-    }
-
-    public List<Frise> getFrises() {
-        return frises;
-    }
-
-    public void setFrises(List<Frise> frises) {
-        this.frises = frises;
-    }
 }

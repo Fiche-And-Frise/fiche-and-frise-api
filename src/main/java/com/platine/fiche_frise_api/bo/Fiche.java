@@ -1,9 +1,6 @@
 package com.platine.fiche_frise_api.bo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Fiche {
@@ -18,18 +15,25 @@ public class Fiche {
     @Column
     private String verso;
 
-    /*@OneToOne
-    private Theme idTheme;*/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "theme_id", nullable = false)
+    private Theme theme;
 
     public Fiche(){
 
     }
 
-    public Fiche(int id, String name, String recto, String verso) {
+    public Fiche(int id, String name, String recto, String verso, User user, Theme theme) {
         this.id = id;
         this.name = name;
         this.recto = recto;
         this.verso = verso;
+        this.user = user;
+        this.theme = theme;
     }
 
     public int getId() {
@@ -64,11 +68,5 @@ public class Fiche {
         this.verso = verso;
     }
 
-    /*public Theme getTheme() {
-        return idTheme;
-    }
 
-    public void setTheme(Theme idTheme) {
-        this.idTheme = idTheme;
-    }*/
 }
