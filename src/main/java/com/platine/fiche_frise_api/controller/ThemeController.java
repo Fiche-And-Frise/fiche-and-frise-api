@@ -18,7 +18,7 @@ public class ThemeController {
         this.themeService = themeService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public Iterable<Theme> getAllThemes(){
         return this.themeService.getAllThemes();
     }

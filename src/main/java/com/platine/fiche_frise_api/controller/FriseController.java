@@ -18,7 +18,7 @@ public class FriseController {
         this.friseService = friseService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public Iterable<Frise> getAllFrises(){
         return this.friseService.getAllFrises();
     }

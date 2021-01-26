@@ -7,21 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     MyUserDetailsService myUserDetailsService;
-
-    @GetMapping("")
-    public String home(){
-        return ("<h1>Welcome</h1>");
-    }
-
-    @GetMapping("/user")
-    public String user(){
-        return ("<h1>Welcome User</h1>");
-    }
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto(){
@@ -30,13 +19,12 @@ public class UserController {
 
     @GetMapping("/registration")
     public ModelAndView showRegistrationForm(){
-        var modelAndView = new ModelAndView("registration");
-        return modelAndView;
+        return new ModelAndView("registration");
     }
 
     @PostMapping("/registration")
     public ModelAndView registerUserAccount(@ModelAttribute("user")UserRegistrationDto registrationDto){
         myUserDetailsService.saveNewUser(registrationDto);
-        return new ModelAndView("redirect:/user/registration?success");
+        return new ModelAndView("redirect:/registration?success");
     }
 }

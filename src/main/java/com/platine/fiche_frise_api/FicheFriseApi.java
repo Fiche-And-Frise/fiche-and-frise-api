@@ -1,9 +1,6 @@
 package com.platine.fiche_frise_api;
 
-import com.platine.fiche_frise_api.bo.Evenement;
-import com.platine.fiche_frise_api.bo.Fiche;
-import com.platine.fiche_frise_api.bo.Frise;
-import com.platine.fiche_frise_api.bo.Theme;
+import com.platine.fiche_frise_api.bo.*;
 import com.platine.fiche_frise_api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
@@ -26,7 +22,7 @@ public class FicheFriseApi {
 
     @Bean
     @Autowired
-    public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository, EvenementRepository evenementRepository) {
+    public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository, EvenementRepository evenementRepository, UserRepository userRepository) {
         return (args) -> {
 
             List<Fiche> listFiches = new ArrayList<>();
@@ -72,6 +68,10 @@ public class FicheFriseApi {
                     listFiches,
                     listFrises);
 
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            User yanis = new User("yanis", passwordEncoder.encode("bonjour"),
+                    true, "ROLE_USER",
+                    Collections.singletonList(themeTest), Collections.singletonList(ficheYanis), listFrises);
 
             // save a couple of fiches
             ficheRepository.save(ficheMaxime);
@@ -86,6 +86,9 @@ public class FicheFriseApi {
 
             //save a theme
             themeRepository.save(themeTest);
+
+            //save a user
+            userRepository.save(yanis);
 
         };
     }
