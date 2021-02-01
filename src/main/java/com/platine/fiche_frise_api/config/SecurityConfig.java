@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -31,14 +33,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/themes*").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/registration*").permitAll()
                 .antMatchers("/login*").permitAll()
-                .and().formLogin().defaultSuccessUrl("/fiches", true);
+                .and().formLogin().failureHandler(authenticationFailureHandler()).successHandler(authenticationSuccessHandler());
     }
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user1").password(getPasswordEncoder().encode("user1Pass")).roles("USER");
         auth.userDetailsService(userDetailsService);
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
     }
 
     @Bean
