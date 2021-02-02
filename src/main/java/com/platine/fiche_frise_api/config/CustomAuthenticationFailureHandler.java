@@ -24,7 +24,11 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
             throws IOException, ServletException {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setContentType("application/json");
         Map<String, Object> data = new HashMap<>();
+        data.put(
+                "error",
+                "Log in failed");
         data.put(
                 "timestamp",
                 Calendar.getInstance().getTime());

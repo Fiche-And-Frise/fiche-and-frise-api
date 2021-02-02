@@ -23,12 +23,17 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_USER")) {
             response.setStatus(HttpStatus.OK.value());
+            response.setContentType("application/json");
             Map<String, Object> data = new HashMap<>();
+            data.put(
+                    "username",
+                    authentication.getName()
+                    );
             data.put(
                     "timestamp",
                     Calendar.getInstance().getTime());
             data.put(
-                    "Message",
+                    "message",
                     "Logged in");
 
             response.getOutputStream()
