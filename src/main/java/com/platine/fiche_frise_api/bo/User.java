@@ -1,5 +1,7 @@
 package com.platine.fiche_frise_api.bo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,12 +16,13 @@ public class User {
     private String password;
     private boolean active;
     private String role;
+    @JsonManagedReference(value = "user_theme")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Theme> themes;
-
+    @JsonManagedReference(value = "user_fiche")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Fiche> fiches;
-
+    @JsonManagedReference(value = "user_frise")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Frise> frises;
 

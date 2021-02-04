@@ -32,29 +32,27 @@ public class FicheFriseApi {
             User yanis = new User("yanis", passwordEncoder.encode("bonjour"),
                     true, "ROLE_USER");
 
-            var themePremiereGM = new Theme(23,
-                    "TestTheme",
+            var themePremiereGM = new Theme("TestTheme",
                     "black",
                     maxime);
 
-            var themeSecondeGM = new Theme(12,
-                    "TestTheme",
+            var themeSecondeGM = new Theme("TestTheme",
                     "black",
                     yanis);
 
-            var ficheMaxime = new Fiche(1, "Première fiche de Maxime",
+            var ficheMaxime = new Fiche( "Première fiche de Maxime",
                     "La première fiche de Maxime",
                     "19/07/1998",
                     maxime,
                     themePremiereGM);
 
-            var ficheMaxime2 = new Fiche(3, "Deuxième fiche de Maxime",
+            var ficheMaxime2 = new Fiche("Deuxième fiche de Maxime",
                     "La deuxième fiche de Maxime",
                     "Je suis le verso !",
                     maxime,
                     themePremiereGM);
 
-            var ficheYanis = new Fiche(2, "Première fiche de Yanis",
+            var ficheYanis = new Fiche("Première fiche de Yanis",
                     "La première fiche de Yanis, ici c'est le verso",
                     "Date inconnue",
                     yanis,

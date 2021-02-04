@@ -1,5 +1,7 @@
 package com.platine.fiche_frise_api.bo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,10 +22,11 @@ public class Frise {
     @OneToMany(mappedBy = "frise", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Evenement> listEvenements;
 
+    @JsonBackReference(value = "user_frise")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
+    @JsonBackReference(value = "theme_frise")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "theme_id", nullable = false)
     private Theme theme;

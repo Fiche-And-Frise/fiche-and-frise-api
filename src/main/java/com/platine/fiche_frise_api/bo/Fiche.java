@@ -1,11 +1,14 @@
 package com.platine.fiche_frise_api.bo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
 public class Fiche {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @Column
@@ -15,10 +18,12 @@ public class Fiche {
     @Column
     private String verso;
 
+    @JsonBackReference(value = "user_fiche")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @JsonBackReference(value = "theme_fiche")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "theme_id", nullable = false)
     private Theme theme;
@@ -27,8 +32,7 @@ public class Fiche {
 
     }
 
-    public Fiche(int id, String name, String recto, String verso, User user, Theme theme) {
-        this.id = id;
+    public Fiche(String name, String recto, String verso, User user, Theme theme) {
         this.name = name;
         this.recto = recto;
         this.verso = verso;
@@ -68,5 +72,19 @@ public class Fiche {
         this.verso = verso;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
 }
