@@ -33,11 +33,11 @@ public class FicheFriseApi {
                     true, "ROLE_USER");
 
             var themePremiereGM = new Theme("TestTheme",
-                    "black",
+                    0,
                     maxime);
 
             var themeSecondeGM = new Theme("TestTheme",
-                    "black",
+                    0,
                     yanis);
 
             var ficheMaxime = new Fiche( "Première fiche de Maxime",

@@ -17,7 +17,7 @@ public class Theme {
     private String name;
 
     @Column
-    private String color;
+    private int color;
 
     @JsonBackReference(value = "user_theme")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -35,7 +35,7 @@ public class Theme {
 
     }
 
-    public Theme(String name, String color, User user) {
+    public Theme(String name, int color, User user) {
         this.name = name;
         this.color = color;
         this.user = user;
@@ -57,11 +57,11 @@ public class Theme {
         this.name = name;
     }
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.color = color;
     }
 
