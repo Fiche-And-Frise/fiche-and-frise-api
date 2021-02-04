@@ -62,4 +62,10 @@ public class FicheController {
         newFiche.setUser(getCurrentUser());
         return this.ficheService.createFiche(newFiche);
     }
+
+    @PostMapping("/delete/{id}")
+    public String deleteFiche(@PathVariable int id){
+        this.ficheService.deleteFiche(id);
+        return "deleted";
+    }
 }
