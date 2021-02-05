@@ -68,4 +68,12 @@ public class FicheController {
         this.ficheService.deleteFiche(id);
         return "deleted";
     }
+
+    @PutMapping("/update")
+    public Fiche updateFiche(@RequestBody NewFicheRequest request){
+        Fiche newFiche = request.getFiche();
+        newFiche.setTheme(request.getTheme());
+        newFiche.setUser(getCurrentUser());
+        return this.ficheService.updateFiche(newFiche);
+    }
 }
