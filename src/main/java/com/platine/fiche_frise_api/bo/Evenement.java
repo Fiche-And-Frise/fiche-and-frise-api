@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Evenement {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @Column
@@ -25,8 +26,7 @@ public class Evenement {
 
     }
 
-    public Evenement(int id, String name, int dateDebut, int dateFin, Frise frise) {
-        this.id = id;
+    public Evenement(String name, int dateDebut, int dateFin, Frise frise) {
         this.name = name;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;

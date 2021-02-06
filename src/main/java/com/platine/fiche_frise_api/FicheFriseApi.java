@@ -58,24 +58,24 @@ public class FicheFriseApi {
                     yanis,
                     themeSecondeGM);
 
-            var friseMaxime = new Frise(38,"Frise de Maxime",
+            var friseMaxime = new Frise("Frise de Maxime",
                     1998,
                     2050,
                     maxime,
                     themePremiereGM);
 
-            var friseYanis = new Frise(50,"Frise de Yanis",
+            var friseYanis = new Frise("Frise de Yanis",
                     1900,
                     2000,
                     yanis,
                     themeSecondeGM);
 
-            var evenementPremiereGM = new Evenement(10,
+            var evenementPremiereGM = new Evenement(
                     "Premiere Guerre Mondiale",
                     1914,
                     1918,
                     friseMaxime);
-            var evenementDeuxiemeGM = new Evenement(11,
+            var evenementDeuxiemeGM = new Evenement(
                     "Deuxieme Guerre Mondiale",
                     1939,
                     1945,

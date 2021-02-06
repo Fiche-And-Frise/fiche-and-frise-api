@@ -36,8 +36,7 @@ public class Frise {
 
     }
 
-    public Frise(int id, String name, int dateDebut, int dateFin, User user, Theme theme){
-        this.id = id;
+    public Frise(String name, int dateDebut, int dateFin, User user, Theme theme){
         this.name = name;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
