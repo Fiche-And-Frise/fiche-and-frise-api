@@ -1,27 +1,26 @@
 package com.platine.fiche_frise_api.controller;
 
-import com.platine.fiche_frise_api.bo.Evenement;
-import com.platine.fiche_frise_api.bo.Fiche;
-import com.platine.fiche_frise_api.bo.Frise;
-import com.platine.fiche_frise_api.bo.User;
+import com.platine.fiche_frise_api.bo.*;
 import com.platine.fiche_frise_api.config.MyUserDetails;
 import com.platine.fiche_frise_api.service.FriseService;
+import com.platine.fiche_frise_api.service.ThemeService;
 import com.platine.fiche_frise_api.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/frises")
 public class FriseController {
     private final FriseService friseService;
     private final UserService userService;
+    private final ThemeService themeService;
 
-    public FriseController(FriseService friseService, UserService userService) {
+    public FriseController(FriseService friseService, UserService userService, ThemeService themeService) {
         this.friseService = friseService;
         this.userService = userService;
+        this.themeService = themeService;
     }
 
     @GetMapping("")
@@ -47,6 +46,20 @@ public class FriseController {
     @GetMapping("/{id}/evenements/{idEvenement}")
     public Evenement getEvenement(@PathVariable int id, @PathVariable int idEvenement){
         return this.friseService.getEvenement(id, idEvenement);
+    }
+
+    @PostMapping("/new")
+    public Frise createFrise(@RequestBody NewFriseRequest request){
+        Theme newTheme = request.getTheme();
+        if(this.themeService.getTheme(newTheme.getId()) == null){
+            newTheme = new Theme(request.getTheme().getName(), request.getTheme().getColor(), getCurrentUser());
+            this.themeService.createTheme(newTheme);
+        }
+        Frise newFrise = request.getFrise();
+        newFrise.setTheme(newTheme);
+        newFrise.setUser(getCurrentUser());
+        newFrise.setEvenements(Collections.emptyList());
+        return this.friseService.createFrise(newFrise);
     }
 
     private User getCurrentUser(){

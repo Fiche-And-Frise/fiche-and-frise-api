@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class Frise {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @Column
@@ -91,5 +92,21 @@ public class Frise {
             }
         }
         return null;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 }
