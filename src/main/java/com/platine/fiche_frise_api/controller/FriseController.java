@@ -62,6 +62,17 @@ public class FriseController {
         return this.friseService.createFrise(newFrise);
     }
 
+    @PutMapping("/update")
+    public Frise updateFrise(@RequestBody NewEvenementRequest request){
+        Frise newFrise = request.getFrise();
+        newFrise.setTheme(request.getTheme());
+        newFrise.setUser(getCurrentUser());
+        Evenement newEvenement = request.getEvenement();
+        newEvenement.setFrise(newFrise);
+        this.friseService.createEvenement(newEvenement);
+        return this.friseService.getFrise(newFrise.getId());
+    }
+
     private User getCurrentUser(){
         MyUserDetails user = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userService.getUserByUserName(user.getUsername());

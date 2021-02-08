@@ -3,6 +3,7 @@ package com.platine.fiche_frise_api.service;
 import com.platine.fiche_frise_api.bo.Evenement;
 import com.platine.fiche_frise_api.bo.Frise;
 import com.platine.fiche_frise_api.bo.User;
+import com.platine.fiche_frise_api.repository.EvenementRepository;
 import com.platine.fiche_frise_api.repository.FriseRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,11 @@ import java.util.Objects;
 public class FriseServiceImpl implements FriseService{
 
    private FriseRepository repository;
+   private EvenementRepository evenementRepository;
 
-   public FriseServiceImpl(FriseRepository repository){
+   public FriseServiceImpl(FriseRepository repository, EvenementRepository evenementRepository){
        this.repository = repository;
+       this.evenementRepository = evenementRepository;
    }
 
     @Override
@@ -32,6 +35,8 @@ public class FriseServiceImpl implements FriseService{
         return this.repository.findAllByUser(currentUser);
     }
 
+
+
     @Override
     public Frise createFrise(Frise frise) {
         return this.repository.save(frise);
@@ -45,6 +50,11 @@ public class FriseServiceImpl implements FriseService{
     @Override
     public void deleteFrise(int id) {
         this.repository.delete(this.repository.findById(id).get());
+    }
+
+    @Override
+    public Evenement createEvenement(Evenement evenement) {
+        return this.evenementRepository.save(evenement);
     }
 
     @Override

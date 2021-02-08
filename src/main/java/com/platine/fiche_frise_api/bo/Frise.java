@@ -1,6 +1,7 @@
 package com.platine.fiche_frise_api.bo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,8 +21,9 @@ public class Frise {
     @Column
     private int dateFin;
 
+    @JsonManagedReference(value = "frise_evenement")
     @OneToMany(mappedBy = "frise", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Evenement> listEvenements;
+    private List<Evenement> evenements;
 
     @JsonBackReference(value = "user_frise")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -77,15 +79,15 @@ public class Frise {
     }
 
     public List<Evenement> getEvenements() {
-        return listEvenements;
+        return evenements;
     }
 
     public void setEvenements(List<Evenement> listEvenements) {
-        this.listEvenements = listEvenements;
+        this.evenements = listEvenements;
     }
     
     public Evenement getEvenementById(int idEvenement){
-        for (Evenement e : listEvenements) {
+        for (Evenement e : evenements) {
             if(e.getId() == idEvenement){
                 return e;
             }
@@ -107,5 +109,9 @@ public class Frise {
 
     public void setTheme(Theme theme) {
         this.theme = theme;
+    }
+
+    public void addEvenement(Evenement newEvenement) {
+        this.evenements.add(newEvenement);
     }
 }

@@ -73,12 +73,10 @@ public class FicheFriseApi {
             var evenementPremiereGM = new Evenement(
                     "Premiere Guerre Mondiale",
                     1914,
-                    1918,
                     friseMaxime);
             var evenementDeuxiemeGM = new Evenement(
                     "Deuxieme Guerre Mondiale",
                     1939,
-                    1945,
                     friseYanis);
 
             //save a user

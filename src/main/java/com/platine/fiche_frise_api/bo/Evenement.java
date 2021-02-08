@@ -1,5 +1,7 @@
 package com.platine.fiche_frise_api.bo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,9 +17,7 @@ public class Evenement {
     @Column
     private int dateDebut;
 
-    @Column
-    private int dateFin;
-
+    @JsonBackReference(value = "frise_evenement")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "frise_id", nullable = false)
     private Frise frise;
@@ -26,10 +26,9 @@ public class Evenement {
 
     }
 
-    public Evenement(String name, int dateDebut, int dateFin, Frise frise) {
+    public Evenement(String name, int dateDebut, Frise frise) {
         this.name = name;
         this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
         this.frise = frise;
     }
 
@@ -57,11 +56,11 @@ public class Evenement {
         this.dateDebut = dateDebut;
     }
 
-    public int getDateFin() {
-        return dateFin;
+    public Frise getFrise() {
+        return frise;
     }
 
-    public void setDateFin(int dateFin) {
-        this.dateFin = dateFin;
+    public void setFrise(Frise frise) {
+        this.frise = frise;
     }
 }
