@@ -13,9 +13,9 @@ public class Fiche {
 
     @Column
     private String name;
-    @Column
+    @Column(name = "recto", length = 2048)
     private String recto;
-    @Column
+    @Column(name = "verso", length = 2048)
     private String verso;
 
     @JsonBackReference(value = "user_fiche")

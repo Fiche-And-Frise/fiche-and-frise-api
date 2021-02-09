@@ -32,7 +32,7 @@ public class FicheFriseApi {
             User yanis = new User("yanis", passwordEncoder.encode("bonjour"),
                     true, "ROLE_USER");
 
-            var themePremiereGM = new Theme("TestTheme",
+            var themePremiereGM = new Theme("Première Guerre mondiale",
                     0,
                     maxime);
 
@@ -40,9 +40,11 @@ public class FicheFriseApi {
                     0,
                     yanis);
 
-            var ficheMaxime = new Fiche( "Première fiche de Maxime",
-                    "La première fiche de Maxime",
-                    "19/07/1998",
+            var ficheMaxime = new Fiche( "Début Première Guerre mondiale",
+                    "Le prince héritier de l'empire austro-hongrois est victime d'un attentat à Sarajevo " +
+                            "perpétré par un étudiant nationaliste serbe. L'Autriche-Hongrie déclare la guerre à la Serbie " +
+                            "le 28 juillet. Le jeu des alliances conduira à un embrasement progressif en Europe. ",
+                    "28 juin 1914",
                     maxime,
                     themePremiereGM);
 
@@ -58,9 +60,9 @@ public class FicheFriseApi {
                     yanis,
                     themeSecondeGM);
 
-            var friseMaxime = new Frise("Frise de Maxime",
-                    1998,
-                    2050,
+            var friseMaxime = new Frise("Frise Première Guerre mondiale",
+                    1914,
+                    1918,
                     maxime,
                     themePremiereGM);
 
@@ -71,12 +73,16 @@ public class FicheFriseApi {
                     themeSecondeGM);
 
             var evenementPremiereGM = new Evenement(
-                    "Premiere Guerre Mondiale",
-                    1914,
+                    "Début Premiere Guerre Mondiale",
+                    "28 juillet 1914",
+                    friseMaxime);
+            var evenementPremiereGMfin = new Evenement(
+                    "Fin Premiere Guerre Mondiale",
+                    "11 novembre 1918",
                     friseMaxime);
             var evenementDeuxiemeGM = new Evenement(
                     "Deuxieme Guerre Mondiale",
-                    1939,
+                    "1939",
                     friseYanis);
 
             //save a user
@@ -98,6 +104,7 @@ public class FicheFriseApi {
 
             //save an event
             evenementRepository.save(evenementPremiereGM);
+            evenementRepository.save(evenementPremiereGMfin);
             evenementRepository.save(evenementDeuxiemeGM);
 
         };

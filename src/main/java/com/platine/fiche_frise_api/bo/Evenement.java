@@ -15,7 +15,7 @@ public class Evenement {
     private String name;
 
     @Column
-    private int dateDebut;
+    private String dateDebut;
 
     @JsonBackReference(value = "frise_evenement")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -26,7 +26,7 @@ public class Evenement {
 
     }
 
-    public Evenement(String name, int dateDebut, Frise frise) {
+    public Evenement(String name, String dateDebut, Frise frise) {
         this.name = name;
         this.dateDebut = dateDebut;
         this.frise = frise;
@@ -48,11 +48,11 @@ public class Evenement {
         this.name = name;
     }
 
-    public int getDateDebut() {
+    public String getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(int dateDebut) {
+    public void setDateDebut(String dateDebut) {
         this.dateDebut = dateDebut;
     }
 
