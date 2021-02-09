@@ -2,11 +2,11 @@ package com.platine.fiche_frise_api.bo;
 
 public class NewEvenementRequest {
     private Frise frise;
-    private Theme theme;
+    private int theme;
     private Evenement evenement;
     private int index;
 
-    public NewEvenementRequest(Frise frise, Theme theme, Evenement evenement, int index) {
+    public NewEvenementRequest(Frise frise, int theme, Evenement evenement, int index) {
         this.frise = frise;
         this.theme = theme;
         this.evenement = evenement;
@@ -21,11 +21,11 @@ public class NewEvenementRequest {
         this.frise = frise;
     }
 
-    public Theme getTheme() {
+    public int getTheme() {
         return theme;
     }
 
-    public void setTheme(Theme theme) {
+    public void setTheme(int theme) {
         this.theme = theme;
     }
 

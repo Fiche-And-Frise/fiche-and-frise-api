@@ -66,7 +66,8 @@ public class FriseController {
     @PutMapping("/update")
     public Frise updateFrise(@RequestBody NewEvenementRequest request){
         Frise newFrise = request.getFrise();
-        newFrise.setTheme(request.getTheme());
+        Theme t = this.themeService.getTheme(request.getTheme());
+        newFrise.setTheme(t);
         newFrise.setUser(getCurrentUser());
         Evenement newEvenement = request.getEvenement();
         newEvenement.setFrise(newFrise);
