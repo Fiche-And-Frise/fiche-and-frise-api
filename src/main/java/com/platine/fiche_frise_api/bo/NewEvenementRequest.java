@@ -4,11 +4,13 @@ public class NewEvenementRequest {
     private Frise frise;
     private Theme theme;
     private Evenement evenement;
+    private int index;
 
-    public NewEvenementRequest(Frise frise, Theme theme, Evenement evenement) {
+    public NewEvenementRequest(Frise frise, Theme theme, Evenement evenement, int index) {
         this.frise = frise;
         this.theme = theme;
         this.evenement = evenement;
+        this.index = index;
     }
 
     public Frise getFrise() {
@@ -33,5 +35,13 @@ public class NewEvenementRequest {
 
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

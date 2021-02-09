@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/frises")
@@ -69,8 +70,10 @@ public class FriseController {
         newFrise.setUser(getCurrentUser());
         Evenement newEvenement = request.getEvenement();
         newEvenement.setFrise(newFrise);
-        this.friseService.createEvenement(newEvenement);
-        return this.friseService.getFrise(newFrise.getId());
+        List<Evenement> events = newFrise.getEvenements();
+        events.add(request.getIndex(), newEvenement);
+        //this.friseService.createEvenement(newEvenement);
+        return this.friseService.updateFrise(newFrise);
     }
 
     private User getCurrentUser(){
