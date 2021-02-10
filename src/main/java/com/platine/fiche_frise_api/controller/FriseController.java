@@ -78,6 +78,12 @@ public class FriseController {
         return this.friseService.updateFrise(newFrise);
     }
 
+    @PostMapping("/delete/{id}")
+    public String deleteFrise(@PathVariable int id){
+        this.friseService.deleteFrise(id);
+        return "deleted";
+    }
+
     private User getCurrentUser(){
         MyUserDetails user = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userService.getUserByUserName(user.getUsername());
