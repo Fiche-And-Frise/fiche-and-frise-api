@@ -13,6 +13,12 @@ public class Evenement {
     @Column
     private String dateDebut;
 
+    @Column
+    private int ficheId;
+
+    @Column
+    private int themeId;
+
     public Evenement(){
 
     }
@@ -20,6 +26,15 @@ public class Evenement {
     public Evenement(String name, String dateDebut) {
         this.name = name;
         this.dateDebut = dateDebut;
+        this.ficheId = -1;
+        this.themeId = -1;
+    }
+
+    public Evenement(String name, String dateDebut, int ficheId, int themeId) {
+        this.name = name;
+        this.dateDebut = dateDebut;
+        this.ficheId = ficheId;
+        this.themeId = themeId;
     }
 
     public String getName() {
