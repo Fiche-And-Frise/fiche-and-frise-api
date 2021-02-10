@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Frise {
@@ -21,8 +23,9 @@ public class Frise {
     @Column
     private int dateFin;
 
-    @JsonManagedReference(value = "frise_evenement")
-    @OneToMany(mappedBy = "frise", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "frise_evenements", joinColumns = @JoinColumn(name = "frise_id"))
+    @OrderColumn(name = "evenement_index")
     private List<Evenement> evenements;
 
     @JsonBackReference(value = "user_frise")
@@ -86,14 +89,14 @@ public class Frise {
         this.evenements = listEvenements;
     }
     
-    public Evenement getEvenementById(int idEvenement){
+    /*public Evenement getEvenementById(int idEvenement){
         for (Evenement e : evenements) {
             if(e.getId() == idEvenement){
                 return e;
             }
         }
         return null;
-    }
+    }*/
 
     public User getUser() {
         return user;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/frises")
@@ -70,9 +71,9 @@ public class FriseController {
         newFrise.setTheme(t);
         newFrise.setUser(getCurrentUser());
         Evenement newEvenement = request.getEvenement();
-        newEvenement.setFrise(newFrise);
         List<Evenement> events = newFrise.getEvenements();
         events.add(request.getIndex(), newEvenement);
+        newFrise.setEvenements(events);
         //this.friseService.createEvenement(newEvenement);
         return this.friseService.updateFrise(newFrise);
     }

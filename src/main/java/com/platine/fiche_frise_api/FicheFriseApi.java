@@ -22,7 +22,7 @@ public class FicheFriseApi {
 
     @Bean
     @Autowired
-    public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository, EvenementRepository evenementRepository, UserRepository userRepository) {
+    public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository, UserRepository userRepository) {
         return (args) -> {
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -74,16 +74,16 @@ public class FicheFriseApi {
 
             var evenementPremiereGM = new Evenement(
                     "Début Premiere Guerre Mondiale",
-                    "28 juillet 1914",
-                    friseMaxime);
+                    "28 juillet 1914");
             var evenementPremiereGMfin = new Evenement(
                     "Fin Premiere Guerre Mondiale",
-                    "11 novembre 1918",
-                    friseMaxime);
+                    "11 novembre 1918");
             var evenementDeuxiemeGM = new Evenement(
                     "Deuxieme Guerre Mondiale",
-                    "1939",
-                    friseYanis);
+                    "1939");
+
+            friseMaxime.setEvenements(Arrays.asList(evenementPremiereGM, evenementPremiereGMfin));
+
 
             //save a user
             userRepository.save(maxime);
@@ -103,9 +103,9 @@ public class FicheFriseApi {
             friseRepository.save(friseYanis);
 
             //save an event
-            evenementRepository.save(evenementPremiereGM);
-            evenementRepository.save(evenementPremiereGMfin);
-            evenementRepository.save(evenementDeuxiemeGM);
+            //evenementRepository.save(evenementPremiereGM);
+            //evenementRepository.save(evenementPremiereGMfin);
+            //evenementRepository.save(evenementDeuxiemeGM);
 
         };
     }

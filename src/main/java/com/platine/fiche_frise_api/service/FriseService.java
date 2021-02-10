@@ -15,7 +15,6 @@ public interface FriseService {
     Frise createFrise(Frise frise);
     Frise updateFrise(Frise frise);
     void deleteFrise(int id);
-    Evenement createEvenement(Evenement evenement);
 
     Iterable<Evenement> getAllEvenements(int id);
     Evenement getEvenement(int id, int idEvenement);
