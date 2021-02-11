@@ -52,4 +52,20 @@ public class Evenement {
     public void setDateDebut(String dateDebut) {
         this.dateDebut = dateDebut;
     }
+
+    public int getFicheId() {
+        return ficheId;
+    }
+
+    public void setFicheId(int ficheId) {
+        this.ficheId = ficheId;
+    }
+
+    public int getThemeId() {
+        return themeId;
+    }
+
+    public void setThemeId(int themeId) {
+        this.themeId = themeId;
+    }
 }
