@@ -64,8 +64,8 @@ public class FriseController {
         return this.friseService.createFrise(newFrise);
     }
 
-    @PutMapping("/update")
-    public Frise updateFrise(@RequestBody NewEvenementRequest request){
+    @PutMapping("/update/evenement")
+    public Frise updateEvenement(@RequestBody NewEvenementRequest request){
         Frise newFrise = request.getFrise();
         Theme t = this.themeService.getTheme(request.getTheme());
         newFrise.setTheme(t);
@@ -75,6 +75,15 @@ public class FriseController {
         events.add(request.getIndex(), newEvenement);
         newFrise.setEvenements(events);
         //this.friseService.createEvenement(newEvenement);
+        return this.friseService.updateFrise(newFrise);
+    }
+
+    @PostMapping("/delete/evenement")
+    public Frise deleteEvenement(@RequestBody NewFriseRequest request){
+        Frise newFrise = request.getFrise();
+        Theme t = request.getTheme();
+        newFrise.setTheme(t);
+        newFrise.setUser(getCurrentUser());
         return this.friseService.updateFrise(newFrise);
     }
 
