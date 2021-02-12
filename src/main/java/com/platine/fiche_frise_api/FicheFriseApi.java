@@ -33,14 +33,18 @@ public class FicheFriseApi {
                     true, "ROLE_USER");
 
             var themePremiereGM = new Theme("Première Guerre mondiale",
-                    0,
+                    -1507,
                     maxime);
 
-            var themeSecondeGM = new Theme("TestTheme",
-                    0,
-                    yanis);
+            var themeSecondeGM = new Theme("Seconde Guerre mondiale",
+                    -16385010,
+                    maxime);
 
-            var ficheMaxime = new Fiche( "Début Première Guerre mondiale",
+            var themeRoisDeFrance = new Theme("Rois de France",
+                    -260831,
+                    maxime);
+
+            var ficheMaxime = new Fiche( "Début de la guerre",
                     "Le prince héritier de l'empire austro-hongrois est victime d'un attentat à Sarajevo " +
                             "perpétré par un étudiant nationaliste serbe. L'Autriche-Hongrie déclare la guerre à la Serbie " +
                             "le 28 juillet. Le jeu des alliances conduira à un embrasement progressif en Europe. ",
@@ -48,41 +52,56 @@ public class FicheFriseApi {
                     maxime,
                     themePremiereGM);
 
-            var ficheMaxime2 = new Fiche("Deuxième fiche de Maxime",
-                    "La deuxième fiche de Maxime",
-                    "Je suis le verso !",
+            var ficheMaxime2 = new Fiche( "Fin de la guerre",
+                    "L’armistice met provisoirement fin aux " +
+                            "combats de la Première Guerre mondiale, reconnaissant de facto la victoire des " +
+                            "Alliés et la défaite de l'Allemagne",
+                    "11 novembre 1918",
                     maxime,
                     themePremiereGM);
 
-            var ficheYanis = new Fiche("Première fiche de Yanis",
-                    "La première fiche de Yanis, ici c'est le verso",
-                    "Date inconnue",
-                    yanis,
+            var ficheMaxime3 = new Fiche("Début de la guerre",
+                    "Provoquée par le règlement insatisfaisant de la Première Guerre mondiale et par les ambitions " +
+                            "expansionnistes et hégémoniques des trois principales nations de l’Axe (le Troisième " +
+                            "Reich, l'Italie fasciste et l'Empire du Japon), elle est favorisée par la convergence " +
+                            "d’un ensemble de tensions et conflits régionaux",
+                    "1er septembre 1939",
+                    maxime,
                     themeSecondeGM);
 
-            var friseMaxime = new Frise("Frise Première Guerre mondiale",
+            var ficheMaxime4 = new Fiche("Fin de la guerre",
+                    "C'est la fin de la guerre",
+                    "8 mai 1945",
+                    maxime,
+                    themePremiereGM);
+
+            var friseMaxime = new Frise("Première Guerre mondiale",
                     1914,
                     1918,
                     maxime,
                     themePremiereGM);
 
-            var friseYanis = new Frise("Frise de Yanis",
-                    1900,
-                    2000,
-                    yanis,
+            var friseMaxime2 = new Frise("Deuxième Guerre mondiale",
+                    1939,
+                    1945,
+                    maxime,
                     themeSecondeGM);
 
             var evenementPremiereGM = new Evenement(
-                    "Début Premiere Guerre Mondiale",
-                    "28 juillet 1914");
+                    "Début de la guerre",
+                    "28 juillet 1914",6,3);
             var evenementPremiereGMfin = new Evenement(
-                    "Fin Premiere Guerre Mondiale",
+                    "Fin de la guerre",
                     "11 novembre 1918");
             var evenementDeuxiemeGM = new Evenement(
-                    "Deuxieme Guerre Mondiale",
-                    "1939");
+                    "Début de la guerre",
+                    "1939",8,4);
+            var evenementDeuxiemeGMfin = new Evenement(
+                    "Fin de la guerre",
+                    "8 mai 1945");
 
             friseMaxime.setEvenements(Arrays.asList(evenementPremiereGM, evenementPremiereGMfin));
+            friseMaxime2.setEvenements(Arrays.asList(evenementDeuxiemeGM, evenementDeuxiemeGMfin));
 
 
             //save a user
@@ -92,15 +111,17 @@ public class FicheFriseApi {
             //save a theme
             themeRepository.save(themePremiereGM);
             themeRepository.save(themeSecondeGM);
+            themeRepository.save(themeRoisDeFrance);
 
             // save a couple of fiches
             ficheRepository.save(ficheMaxime);
             ficheRepository.save(ficheMaxime2);
-            ficheRepository.save(ficheYanis);
+            ficheRepository.save(ficheMaxime3);
+            ficheRepository.save(ficheMaxime4);
 
             //save a frise
             friseRepository.save(friseMaxime);
-            friseRepository.save(friseYanis);
+            friseRepository.save(friseMaxime2);
 
             //save an event
             //evenementRepository.save(evenementPremiereGM);
