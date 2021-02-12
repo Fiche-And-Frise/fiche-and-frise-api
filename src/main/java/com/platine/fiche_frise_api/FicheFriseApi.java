@@ -33,15 +33,15 @@ public class FicheFriseApi {
                     true, "ROLE_USER");
 
             var themePremiereGM = new Theme("Première Guerre mondiale",
-                    -1507,
+                    -2452466,
                     maxime);
 
             var themeSecondeGM = new Theme("Seconde Guerre mondiale",
-                    -16385010,
+                    -14834678,
                     maxime);
 
             var themeRoisDeFrance = new Theme("Rois de France",
-                    -260831,
+                    -15502913,
                     maxime);
 
             var ficheMaxime = new Fiche( "Début de la guerre",
@@ -73,7 +73,7 @@ public class FicheFriseApi {
                     "C'est la fin de la guerre",
                     "8 mai 1945",
                     maxime,
-                    themePremiereGM);
+                    themeSecondeGM);
 
             var friseMaxime = new Frise("Première Guerre mondiale",
                     1914,
