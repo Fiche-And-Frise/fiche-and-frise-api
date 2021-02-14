@@ -25,6 +25,9 @@ public class FicheFriseApi {
     public CommandLineRunner demo(FicheRepository ficheRepository, FriseRepository friseRepository, ThemeRepository themeRepository, UserRepository userRepository) {
         return (args) -> {
 
+            if(userRepository.findByUserName("maxime").isPresent()){
+                return;
+            }
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             User maxime = new User("maxime", passwordEncoder.encode("lol"),
                     true, "ROLE_USER");
@@ -75,6 +78,26 @@ public class FicheFriseApi {
                     maxime,
                     themeSecondeGM);
 
+            var ficheMaxime5 = new Fiche("Pépin le Bref",
+                    "Fils cadet de Charles Martel",
+                    "715-768",
+                    maxime,
+                    themeRoisDeFrance);
+
+            var ficheMaxime6 = new Fiche("Fin de la guerre",
+                    "Hugues Capet est le fils de Hugues le Grand, duc des Francs, et de Hedwige de Saxe, ou " +
+                            "Hatua ou Avoia, fille d' Henri Ier de Saxe, dit Henri Ier l'Oiseleur, roi de Germanie",
+                    "987–996",
+                    maxime,
+                    themeRoisDeFrance);
+
+            var ficheMaxime7 = new Fiche("Louis XIV",
+                    "Louis est Dauphin de France jusqu'au 14 mai 1643, puis Roi de France et de Navarre. Il est sacré le 7 juin 1654 à Reims." +
+                            "Il est le fils de Louis XIII, roi de France et d'Anne d'Autriche. ",
+                    "1643–1715",
+                    maxime,
+                    themeRoisDeFrance);
+
             var friseMaxime = new Frise("Première Guerre mondiale",
                     1914,
                     1918,
@@ -86,6 +109,12 @@ public class FicheFriseApi {
                     1945,
                     maxime,
                     themeSecondeGM);
+
+            var friseMaxime3 = new Frise("Les rois de France",
+                    481,
+                    1870,
+                    maxime,
+                    themeRoisDeFrance);
 
             var evenementPremiereGM = new Evenement(
                     "Début de la guerre",
@@ -118,10 +147,14 @@ public class FicheFriseApi {
             ficheRepository.save(ficheMaxime2);
             ficheRepository.save(ficheMaxime3);
             ficheRepository.save(ficheMaxime4);
+            ficheRepository.save(ficheMaxime5);
+            ficheRepository.save(ficheMaxime6);
+            ficheRepository.save(ficheMaxime7);
 
             //save a frise
             friseRepository.save(friseMaxime);
             friseRepository.save(friseMaxime2);
+            friseRepository.save(friseMaxime3);
 
             //save an event
             //evenementRepository.save(evenementPremiereGM);
