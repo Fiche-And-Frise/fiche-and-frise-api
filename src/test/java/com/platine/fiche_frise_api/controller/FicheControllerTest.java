@@ -6,10 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.test.context.support.WithSecurityContext;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.annotation.*;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,13 +30,6 @@ public class FicheControllerTest {
     @BeforeEach
     void setup(){
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    void getAllFiches_shouldCallTheService() {
-        ficheController.getAllFiches();
-
-        verify(ficheService).getAllFiches();
     }
 
     @Test
@@ -60,7 +57,7 @@ public class FicheControllerTest {
         var getMapping = getAllFiches.getAnnotation(GetMapping.class);
 
         assertNotNull(getMapping);
-        assertArrayEquals(new String[]{"/"}, getMapping.value());
+        assertArrayEquals(new String[]{""}, getMapping.value());
     }
 
     @Test

@@ -10,6 +10,9 @@ import com.platine.fiche_frise_api.config.MyUserDetailsService;
 import com.platine.fiche_frise_api.service.ThemeService;
 import com.platine.fiche_frise_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +34,13 @@ public class FicheController {
     }
 
     @GetMapping("")
-    public Iterable<Fiche> getAllFiches(){
+    public ResponseEntity<Iterable<Fiche>> getAllFiches(){
         User currentUser = getCurrentUser();
         if(currentUser != null){
             System.out.println("Dans le get fiches : " + currentUser);
-            return this.ficheService.getFichesByUser(currentUser);
+            return ResponseEntity.status(HttpStatus.OK).body(this.ficheService.getFichesByUser(currentUser));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
     @GetMapping("/{id}")
@@ -46,8 +49,13 @@ public class FicheController {
     }
 
     private User getCurrentUser(){
-        MyUserDetails user = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userService.getUserByUserName(user.getUsername());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth != null && !(auth.getPrincipal() instanceof String)){
+            System.out.println("Principal : " + auth.getPrincipal());
+            MyUserDetails user = (MyUserDetails) auth.getPrincipal();
+            return userService.getUserByUserName(user.getUsername());
+        }
+        return null;
     }
 
     @PostMapping("/new")
